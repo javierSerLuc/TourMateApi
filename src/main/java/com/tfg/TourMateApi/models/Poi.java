@@ -1,6 +1,8 @@
 package com.tfg.TourMateApi.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -14,12 +16,19 @@ import java.util.Objects;
 
 @Getter
 @Setter
+@NoArgsConstructor
 public class Poi {
+    @JsonProperty("nombre")
     private String nombre;
+    @JsonProperty("servicio")
     private String servicio;
+    @JsonProperty("lat")
     private String lat;
+    @JsonProperty("lng")
     private String lng;
+    @JsonProperty("tiempoVisita")
     private double tiempoVisita;
+    @JsonProperty("horario")
     private List<String> horario;
 
     public Poi(String nombre, String servicio, String lng, String lat, double tiempoVisita, String horario) {
