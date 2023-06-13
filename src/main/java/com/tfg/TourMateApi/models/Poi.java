@@ -45,11 +45,7 @@ public class Poi {
             Horario = Horario.replace("'", "");
             // splice string Horario by the colon ['Mo-Fr 13:30-18:00', 'Sa-Su 09:00-11:00']
             String[] horario = Horario.split(", ");
-            //Collections.addAll(this.horario, horario);
-            for (String franja : horario) {
-                //System.out.println(franja);
-                this.horario.add(franja);
-            }
+            Collections.addAll(this.horario, horario);
         }
 
     }
