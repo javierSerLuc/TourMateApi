@@ -8,6 +8,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Service
 public class GeneratMatrizTiempoORS implements GenerarTimeMatrixService {
     @Override
     public List<List<Double>> generarMatrizTiempo(List<Poi> pois) {
@@ -61,9 +63,10 @@ public class GeneratMatrizTiempoORS implements GenerarTimeMatrixService {
     }
 
     private List<List<Double>> procesarMatriz (ResponseEntity<String> response){
+        String body = response.getBody();
         ObjectMapper objectMapper = new ObjectMapper();
         try{
-            JsonNode jsonNode = objectMapper.readTree(String.valueOf(response));
+            JsonNode jsonNode = objectMapper.readTree(body);
             JsonNode durationsNode = jsonNode.get("durations");
 
             List<List<Double>> durationsList = new ArrayList<>();
