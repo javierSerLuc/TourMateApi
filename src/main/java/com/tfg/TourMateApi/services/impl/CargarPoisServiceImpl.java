@@ -15,13 +15,13 @@ public class CargarPoisServiceImpl implements CargarPoisService {
     @Override
     public List<Poi> cargarPois(int instancia) {
 
-        return cargarPoisJson();
+        return cargarPoisJson(instancia);
     }
 
-    public List<Poi> cargarPoisJson(){
+    private List<Poi> cargarPoisJson(int instancia){
         ObjectMapper objectMapper = new ObjectMapper();
         try {
-            File file = new File("src/main/resources/poisJson/response-100.json");
+            File file = new File(elegirDataSet(instancia));
             JsonNode jsonNode = objectMapper.readTree(file);
             JsonNode poisProperty = jsonNode.get("pois");
             Poi[] poisArray = objectMapper.convertValue(poisProperty, Poi[].class);
@@ -30,5 +30,20 @@ public class CargarPoisServiceImpl implements CargarPoisService {
             e.printStackTrace();
         }
         return null;
+    }
+
+    private String elegirDataSet(int instancia){
+        String dataSet;
+        switch (instancia){
+            case 1:
+                dataSet = "src/main/resources/poisJson/1-response-51.json";
+                break;
+            default:
+                dataSet = "src/main/resources/poisJson/response-100.json";
+                break;
+
+        }
+        return dataSet;
+
     }
 }

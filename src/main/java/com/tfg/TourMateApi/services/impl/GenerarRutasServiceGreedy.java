@@ -21,7 +21,7 @@ public class GenerarRutasServiceGreedy implements GenearRutasService {
     public List<Ruta> generarRutas(int num) {
 
         //Obtener Pois
-        List<Poi> allPois = cargarPoisService.cargarPois(0);
+        List<Poi> allPois = cargarPoisService.cargarPois(1);
         //Aplicar Algoritmo
 
         //Devolver Rutas
