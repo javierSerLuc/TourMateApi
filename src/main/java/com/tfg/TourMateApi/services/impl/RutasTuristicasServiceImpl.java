@@ -16,7 +16,7 @@ public class RutasTuristicasServiceImpl implements RutasTuristicasService {
     }
 
     @Override
-    public List<Ruta> getRutas() {
+    public List<Ruta> getRutas(int numRutas) {
 
         //Instaciar objetos
 
@@ -25,6 +25,6 @@ public class RutasTuristicasServiceImpl implements RutasTuristicasService {
         //Ordenarlas
 
         //Devolverlas
-        return genearRutasService.generarRutas(1);
+        return genearRutasService.generarRutas(numRutas);
     }
 }

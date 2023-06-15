@@ -14,6 +14,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
@@ -31,10 +32,17 @@ public class RutasController {
         this.rutasTuristicasService = rutasTuristicasService;
     }
 
-    @GetMapping("/api/getRutas")
-    public List<Ruta> genRutas(){
+    @GetMapping("/api/getRutas/{numRutas}")
+    public List<Ruta> genRutas(@PathVariable int numRutas){
         //Ruta rutaDemo = new Ruta(cargarPoisJson());
-        return rutasTuristicasService.getRutas();
+        return rutasTuristicasService.getRutas(numRutas);
+    }
+
+    @GetMapping("/api/getPois")
+    public Ruta genPois(){
+        Ruta rutaDemo = new Ruta(cargarPoisJson());
+        return rutaDemo;
+        //return rutasTuristicasService.getRutas();
     }
     
 

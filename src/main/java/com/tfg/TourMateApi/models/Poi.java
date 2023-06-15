@@ -55,6 +55,7 @@ public class Poi {
             // splice string Horario by the colon ['Mo-Fr 13:30-18:00', 'Sa-Su 09:00-11:00']
             String[] horario = Horario.split(", ");
             Collections.addAll(this.horario, horario);
+
         }
 
     }
@@ -79,10 +80,21 @@ public class Poi {
     
         // Verificar si el POI abre los días adecuados
         DayOfWeek startDay = convertDayOfWeek(days[0]);
-        DayOfWeek endDay = convertDayOfWeek(days[1]);
+        DayOfWeek endDay;
+        if(days.length > 1){
+            endDay = convertDayOfWeek(days[1]);
+        }
+        else{
+            endDay = startDay;
+        }
+
         
         if (dayOfWeek.compareTo(startDay) < 0 || dayOfWeek.compareTo(endDay) > 0) {
             return false;
+        }
+
+        if (hours[0].split(":")[0].length() == 1) {
+            hours[0] = "0" + hours[0];
         }
 
         // Verificar si el POI está abierto en la hora actual
