@@ -9,10 +9,7 @@ import com.tfg.TourMateApi.services.CargarPoisService;
 import com.tfg.TourMateApi.services.GenerarTimeMatrixService;
 import com.tfg.TourMateApi.services.RutasTuristicasService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -33,9 +30,13 @@ public class RutasController {
     }
 
     @GetMapping("/api/getRutas/{numRutas}")
-    public List<Ruta> genRutas(@PathVariable int numRutas){
+    public ResponseEntity<Object> genRutas(@PathVariable int numRutas){
         //Ruta rutaDemo = new Ruta(cargarPoisJson());
-        return rutasTuristicasService.getRutas(numRutas);
+        Map<String, Object> respuesta = new HashMap<>();
+        respuesta.put("numeroRutas",numRutas);
+        respuesta.put("rutas",rutasTuristicasService.getRutas(numRutas)) ;
+
+        return new ResponseEntity<>(respuesta,(HttpStatus)HttpStatus.OK);
     }
 
     @GetMapping("/api/getPois")
