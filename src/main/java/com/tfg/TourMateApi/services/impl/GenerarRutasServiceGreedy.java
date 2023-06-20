@@ -30,7 +30,7 @@ public class GenerarRutasServiceGreedy implements GenearRutasService {
 
         List<Ruta> rutas = new ArrayList<>();
         LocalTime dateInicioRuta = LocalTime.of(9,0);
-        LocalTime dateFinRuta = LocalTime.of(20,0);
+        LocalTime dateFinRuta = LocalTime.of(12,0);
         DayOfWeek diaRuta = DayOfWeek.TUESDAY;
 
         //Obtener Pois
