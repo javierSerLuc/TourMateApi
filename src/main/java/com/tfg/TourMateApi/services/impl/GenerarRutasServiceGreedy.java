@@ -117,6 +117,8 @@ public class GenerarRutasServiceGreedy implements GenearRutasService {
             //poiActual = siguientePoi;
             //indiceActual = indiceSiguiente;
             fechaActual = fechaActual.plusSeconds((tiempoMinimoEntrePois.longValue()));
+            long tiempoVisita = (long) (siguientePoi.getTiempoVisita() * 60);
+            fechaActual = fechaActual.plusSeconds(tiempoVisita);
 
         }
 
