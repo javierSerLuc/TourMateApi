@@ -5,6 +5,7 @@ import com.tfg.TourMateApi.models.Ruta;
 import com.tfg.TourMateApi.services.CargarPoisService;
 import com.tfg.TourMateApi.services.GenearRutasService;
 import com.tfg.TourMateApi.services.GenerarTimeMatrixService;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.time.DayOfWeek;
@@ -16,6 +17,7 @@ import java.util.List;
 import java.util.Random;
 
 @Service
+@Qualifier("Greedy")
 public class GenerarRutasServiceGreedy implements GenearRutasService {
     private CargarPoisService cargarPoisService;
     private GenerarTimeMatrixService generarTimeMatrixService;
