@@ -31,7 +31,7 @@ public class GenerarPathServiceORS implements GenerarPathsService {
     }
 
     private void generarPath(Ruta ruta){
-        ruta.setpath(procesarPath(getPathORM(ruta)));
+        ruta.setpath(procesarPath(getPathORM(ruta),ruta));
     }
 
     private ResponseEntity<String> getPathORM(Ruta ruta){
@@ -73,7 +73,7 @@ public class GenerarPathServiceORS implements GenerarPathsService {
         return responseEntity;
     }
 
-    private List<List<Double>> procesarPath(ResponseEntity<String> response){
+    private List<List<Double>> procesarPath(ResponseEntity<String> response,Ruta ruta){
         String body = response.getBody();
         ObjectMapper objectMapper = new ObjectMapper();
 
@@ -86,8 +86,17 @@ public class GenerarPathServiceORS implements GenerarPathsService {
                     .path("geometry")
                     .path("coordinates");
 
+
             //List<List<Double>> path = new ArrayList<>();;
             List<List<Double>> path = objectMapper.readValue(pathNode.toString(), new TypeReference<List<List<Double>>>() {});
+
+            JsonNode distanteNode = jsonNode
+                    .path("features")
+                    .path(0)
+                    .path("properties")
+                    .path("summary")
+                    .path("distance");
+            ruta.setDistancia(objectMapper.readValue(distanteNode.toString(),new TypeReference<Double>(){}));
 
             /*for(int i = 0; i < pathNode.size();i++){
                 JsonNode pointnode = pathNode.get(i);

@@ -12,6 +12,7 @@ import java.util.List;
 public class Ruta {
     private List<Poi> pois;
     private List<List<Double>> path;
+    private Double distancia;
 
     public Ruta() {
         this.pois = new ArrayList<>();
@@ -31,6 +32,7 @@ public class Ruta {
     public void setpath(List<List<Double>> path){
         this.path = path;
     }
+    public void setDistancia(Double distancia){this.distancia = distancia;}
 
 
 }
