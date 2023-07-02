@@ -40,7 +40,7 @@ public class DecisionMatrixServiceImpl implements DecisionMatrixService {
     private void  evaluarCriterioDistancia (List<Ruta> rutas){
 
         for(int i = 0; i < rutas.size();i++){
-            matrizEvaluacion.get(i).set(IDISTANCIA,//rutapropertie);
+            matrizEvaluacion.get(i).set(IDISTANCIA,rutas.get(i).getDistancia());
         }
     }
 }
