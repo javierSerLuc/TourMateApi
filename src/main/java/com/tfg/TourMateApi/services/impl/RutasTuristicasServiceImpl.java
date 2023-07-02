@@ -4,6 +4,7 @@ import com.tfg.TourMateApi.models.Ruta;
 import com.tfg.TourMateApi.services.GenearRutasService;
 import com.tfg.TourMateApi.services.GenerarPathsService;
 import com.tfg.TourMateApi.services.RutasTuristicasService;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,7 +14,7 @@ public class RutasTuristicasServiceImpl implements RutasTuristicasService {
     private GenearRutasService genearRutasService;
     private GenerarPathsService generarPathsService;
 
-    public RutasTuristicasServiceImpl(GenearRutasService genearRutasService,GenerarPathsService generarPathsService) {
+    public RutasTuristicasServiceImpl(@Qualifier("ORS") GenearRutasService genearRutasService, GenerarPathsService generarPathsService) {
         this.genearRutasService = genearRutasService;
         this.generarPathsService = generarPathsService;
     }

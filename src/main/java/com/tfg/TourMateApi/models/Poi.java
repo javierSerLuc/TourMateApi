@@ -69,7 +69,32 @@ public class Poi {
 
 
     
+    public boolean isPoiOpenDay(DayOfWeek dayOfWeek){
+        if(this.horario.size() == 1){
+            return isPoiOpenDay(dayOfWeek , horario.get(0));
+        }
+        return isPoiOpenDay(dayOfWeek, horario.get(0)) && isPoiOpenDay(dayOfWeek, horario.get(1));
+    }
 
+    private static boolean isPoiOpenDay(DayOfWeek dayOfWeek,String ventanaTiempo){
+        String[] parts = ventanaTiempo.split(" ");
+        String[] days = parts[0].split("-");
+
+        DayOfWeek startDay = convertDayOfWeek(days[0]);
+        DayOfWeek endDay;
+        if(days.length > 1){
+            endDay = convertDayOfWeek(days[1]);
+        }
+        else{
+            endDay = startDay;
+        }
+
+        if (dayOfWeek.compareTo(startDay) < 0 || dayOfWeek.compareTo(endDay) > 0) {
+            return false;
+        }
+        return true;
+
+    }
     private static boolean isPOIOpen(DayOfWeek dayOfWeek, LocalTime currentTime, String openingHours) {
         // Formato esperado de las horas de apertura: "Mo-Fr 13:30-18:00"
         String[] parts = openingHours.split(" ");
