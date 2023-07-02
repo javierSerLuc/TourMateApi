@@ -8,6 +8,7 @@ import java.util.List;
 
 public class DecisionMatrixServiceImpl implements DecisionMatrixService {
     List<List<Double>> matrizEvaluacion;
+    final int NUMCRITERIOS = 1;
     final int IDISTANCIA = 0;
     //constantes para indices de criterios
 
@@ -17,6 +18,11 @@ public class DecisionMatrixServiceImpl implements DecisionMatrixService {
 
     @Override
     public List<List<Double>> getDecisionMatrix(List<Ruta> rutas) {
+        /**/
+        for(int i = 0; i < rutas.size();i++){
+            matrizEvaluacion.add(new ArrayList<>());
+        }
+
         //Evaluar
         evaluarMatriz(rutas);
         //normalizar
