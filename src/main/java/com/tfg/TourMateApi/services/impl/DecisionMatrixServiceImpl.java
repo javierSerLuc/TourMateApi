@@ -2,10 +2,12 @@ package com.tfg.TourMateApi.services.impl;
 
 import com.tfg.TourMateApi.models.Ruta;
 import com.tfg.TourMateApi.services.DecisionMatrixService;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class DecisionMatrixServiceImpl implements DecisionMatrixService {
     private List<List<Double>> matrizEvaluacion;
     private List<List<Double>> matrizDecision;
