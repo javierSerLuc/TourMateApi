@@ -9,10 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Getter
-public class Ruta {
+public class Ruta implements Comparable<Ruta> {
     private List<Poi> pois;
     private List<List<Double>> path;
     private Double distancia;
+    private Double coeficienteRS;
 
     public Ruta() {
         this.pois = new ArrayList<>();
@@ -33,6 +34,17 @@ public class Ruta {
         this.path = path;
     }
     public void setDistancia(Double distancia){this.distancia = distancia;}
+    public void setCoeficienteRS(Double coeficienteRS){this.coeficienteRS = coeficienteRS;}
 
 
+    @Override
+    public int compareTo(Ruta otraRuta) {
+        if (this.coeficienteRS > otraRuta.getCoeficienteRS()) {
+            return -1; // Indica que el objeto actual es mayor
+        } else if (this.coeficienteRS < otraRuta.getCoeficienteRS()) {
+            return 1; // Indica que el objeto actual es menor
+        } else {
+            return 0; // Indica que ambos objetos son iguales
+        }
+    }
 }
