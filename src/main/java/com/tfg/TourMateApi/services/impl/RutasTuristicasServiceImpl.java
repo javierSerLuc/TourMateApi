@@ -4,6 +4,7 @@ import com.tfg.TourMateApi.models.Ruta;
 import com.tfg.TourMateApi.services.GenearRutasService;
 import com.tfg.TourMateApi.services.GenerarPathsService;
 import com.tfg.TourMateApi.services.RutasTuristicasService;
+import com.tfg.TourMateApi.services.TopsisService;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
@@ -13,10 +14,12 @@ import java.util.List;
 public class RutasTuristicasServiceImpl implements RutasTuristicasService {
     private GenearRutasService genearRutasService;
     private GenerarPathsService generarPathsService;
+    private TopsisService topsisService;
 
-    public RutasTuristicasServiceImpl(@Qualifier("ORS") GenearRutasService genearRutasService, GenerarPathsService generarPathsService) {
+    public RutasTuristicasServiceImpl(@Qualifier("ORS") GenearRutasService genearRutasService, GenerarPathsService generarPathsService,TopsisService topsisService) {
         this.genearRutasService = genearRutasService;
         this.generarPathsService = generarPathsService;
+        this.topsisService = topsisService;
     }
 
     @Override
@@ -33,9 +36,11 @@ public class RutasTuristicasServiceImpl implements RutasTuristicasService {
 
 
         //Ordenarlas
+        List<Ruta> rutasOrdenadas = topsisService.ordenacionTopsis(rutas);
 
         //Devolverlas
         //return genearRutasService.generarRutas(numRutas);
-        return rutas;
+        //return rutas;
+        return rutasOrdenadas;
     }
 }
