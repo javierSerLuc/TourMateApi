@@ -3,6 +3,7 @@ package com.tfg.TourMateApi.services.impl;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.tfg.TourMateApi.models.EspecificacionFechaRuta;
 import com.tfg.TourMateApi.models.Job;
 import com.tfg.TourMateApi.models.Poi;
 import com.tfg.TourMateApi.models.Ruta;
@@ -30,16 +31,20 @@ public class GenerarRutasServiceORS implements GenearRutasService {
     }
 
     @Override
-    public List<Ruta> generarRutas(int num) {
+    public List<Ruta> generarRutas(int num, EspecificacionFechaRuta especificacionFechaRuta) {
         //Set datos previos
         List<Ruta> rutas = new ArrayList<>();
 
-        LocalTime dateInicioRuta = LocalTime.of(9,0);
+       /* LocalTime dateInicioRuta = LocalTime.of(9,0);
         LocalTime dateFinRuta = LocalTime.of(19,0);
-        DayOfWeek diaRuta = DayOfWeek.TUESDAY;
+        DayOfWeek diaRuta = DayOfWeek.TUESDAY;*/
+
+        LocalTime dateInicioRuta = especificacionFechaRuta.getDateInicioRuta(); /*LocalTime.of(9,0);*/
+        LocalTime dateFinRuta = especificacionFechaRuta.getDateFinRuta();/*LocalTime.of(12,0);*/
+        DayOfWeek diaRuta = especificacionFechaRuta.getDia();
 
         //obtener pois
-        List<Poi> allPois = this.cargarPoisService.cargarPois(0);
+        List<Poi> allPois = this.cargarPoisService.cargarPois(1);
 
         //generar rutas
         for(int i = 0; i < num; i++){
@@ -137,8 +142,13 @@ public class GenerarRutasServiceORS implements GenearRutasService {
                 }
             }
 
+
             for(int i = 0; i < jobIds.size(); i++){
                 poisVisitados.add(pois.get(jobIds.get(i)));
+               //poisAVisitar1.add(pois.get(jobs.get(jobIds.get(i)).getId()));
+               //Poi poiAVisitar = pois.get(jobs.get(jobIds.get(i)).getId());
+               //poisAVisitar2.add(poiAVisitar);
+                //poisVisitados.add(poiAVisitar);
             }
 
             return poisVisitados;

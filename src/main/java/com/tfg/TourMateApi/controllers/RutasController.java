@@ -29,12 +29,13 @@ public class RutasController {
         this.rutasTuristicasService = rutasTuristicasService;
     }
 
-    @GetMapping("/api/getRutas/{numRutas}")
-    public ResponseEntity<Object> genRutas(@PathVariable int numRutas){
+
+    @PostMapping("/api/getRutas/{numRutas}")
+    public ResponseEntity<Object> genRutas(@PathVariable int numRutas,@RequestBody EspecificacionRuta especificacionRuta){
         //Ruta rutaDemo = new Ruta(cargarPoisJson());
         Map<String, Object> respuesta = new HashMap<>();
         respuesta.put("numeroRutas",numRutas);
-        respuesta.put("rutas",rutasTuristicasService.getRutas(numRutas)) ;
+        respuesta.put("rutas",rutasTuristicasService.getRutas(numRutas,especificacionRuta)) ;
 
         return new ResponseEntity<>(respuesta,(HttpStatus)HttpStatus.OK);
     }

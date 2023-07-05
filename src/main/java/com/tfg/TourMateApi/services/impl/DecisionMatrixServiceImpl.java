@@ -4,6 +4,7 @@ import com.tfg.TourMateApi.models.Criterios;
 import com.tfg.TourMateApi.models.Ruta;
 import com.tfg.TourMateApi.services.DecisionMatrixService;
 import lombok.Getter;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -32,6 +33,18 @@ public class DecisionMatrixServiceImpl implements DecisionMatrixService {
     @Override
     public List<List<Double>> getDecisionMatrix(List<Ruta> rutas) {
         /**/
+        matrizEvaluacion.clear();
+        matrizDecision.clear();
+        vectorPesos.clear();
+        matrizPonderada.clear();
+
+        matrizEvaluacion = new ArrayList<>();
+        matrizDecision = new ArrayList<>();
+        vectorPesos = new ArrayList<>();
+        matrizPonderada = new ArrayList<>();
+
+
+
         numRutas = rutas.size();
         for(int i = 0; i < numRutas ;i++){
             matrizEvaluacion.add(new ArrayList<>());
