@@ -1,5 +1,6 @@
 package com.tfg.TourMateApi.services.impl;
 
+import com.tfg.TourMateApi.models.EspecificacionFechaRuta;
 import com.tfg.TourMateApi.models.Poi;
 import com.tfg.TourMateApi.models.Ruta;
 import com.tfg.TourMateApi.services.CargarPoisService;
@@ -28,12 +29,12 @@ public class GenerarRutasServiceGreedy implements GenearRutasService {
     }
 
     @Override
-    public List<Ruta> generarRutas(int num) {
+    public List<Ruta> generarRutas(int num, EspecificacionFechaRuta especificacionFechaRuta) {
 
         List<Ruta> rutas = new ArrayList<>();
-        LocalTime dateInicioRuta = LocalTime.of(9,0);
-        LocalTime dateFinRuta = LocalTime.of(12,0);
-        DayOfWeek diaRuta = DayOfWeek.TUESDAY;
+        LocalTime dateInicioRuta = especificacionFechaRuta.getDateInicioRuta(); /*LocalTime.of(9,0);*/
+        LocalTime dateFinRuta = especificacionFechaRuta.getDateFinRuta();/*LocalTime.of(12,0);*/
+        DayOfWeek diaRuta = especificacionFechaRuta.getDia();
 
         //Obtener Pois
         List<Poi> allPois = cargarPoisService.cargarPois(1);
@@ -92,7 +93,7 @@ public class GenerarRutasServiceGreedy implements GenearRutasService {
         Poi poiActual = initPoi;
         Ruta ruta = new Ruta();
         ruta.addPoi(initPoi);
-        LocalTime fechaActual = initTime;
+        LocalTime fechaActual = initTime; //TODO : añadir tiempo visita del primero
 
         List<Poi> poisRestantes = new ArrayList<>(pois);
         poisRestantes.remove(0);

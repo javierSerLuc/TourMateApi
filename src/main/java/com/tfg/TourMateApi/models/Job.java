@@ -17,12 +17,15 @@ public class Job {
     private int service;
     private List<Integer> skills;
     private List<Double> location;
+    private List<Integer> amount;
     private List<List<Integer>> time_window;
 
     public Job(Poi poi,int id){
         this.skills = new ArrayList<>();
         this.location = new ArrayList<>();
         this.time_window = new ArrayList<>();
+        this.amount = new ArrayList<>();
+        amount.add(1);
 
         this.id = id;
         this.service = (int) poi.getTiempoVisita() * 60;

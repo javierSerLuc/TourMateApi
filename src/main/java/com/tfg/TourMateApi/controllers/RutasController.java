@@ -3,6 +3,8 @@ package com.tfg.TourMateApi.controllers;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.tfg.TourMateApi.models.EspecificacionFechaRuta;
+import com.tfg.TourMateApi.models.EspecificacionRuta;
 import com.tfg.TourMateApi.models.Poi;
 import com.tfg.TourMateApi.models.Ruta;
 import com.tfg.TourMateApi.services.CargarPoisService;
@@ -10,9 +12,7 @@ import com.tfg.TourMateApi.services.GenerarTimeMatrixService;
 import com.tfg.TourMateApi.services.RutasTuristicasService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.File;
@@ -29,12 +29,13 @@ public class RutasController {
         this.rutasTuristicasService = rutasTuristicasService;
     }
 
-    @GetMapping("/api/getRutas/{numRutas}")
-    public ResponseEntity<Object> genRutas(@PathVariable int numRutas){
+
+    @PostMapping("/api/getRutas/{numRutas}")
+    public ResponseEntity<Object> genRutas(@PathVariable int numRutas,@RequestBody EspecificacionRuta especificacionRuta){
         //Ruta rutaDemo = new Ruta(cargarPoisJson());
         Map<String, Object> respuesta = new HashMap<>();
         respuesta.put("numeroRutas",numRutas);
-        respuesta.put("rutas",rutasTuristicasService.getRutas(numRutas)) ;
+        respuesta.put("rutas",rutasTuristicasService.getRutas(numRutas,especificacionRuta)) ;
 
         return new ResponseEntity<>(respuesta,(HttpStatus)HttpStatus.OK);
     }
@@ -44,6 +45,11 @@ public class RutasController {
         Ruta rutaDemo = new Ruta(cargarPoisJson());
         return rutaDemo;
         //return rutasTuristicasService.getRutas();
+    }
+
+    @PostMapping("api/prDates")
+    public EspecificacionRuta genPr(@RequestBody EspecificacionRuta especificacionRuta){
+        return especificacionRuta;
     }
     
 
