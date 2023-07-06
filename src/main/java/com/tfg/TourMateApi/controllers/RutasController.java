@@ -22,11 +22,13 @@ import java.util.*;
 public class RutasController {
 
     private RutasTuristicasService rutasTuristicasService;
+    private CargarPoisService cargarPoisService;
 
 
 
-    public RutasController(RutasTuristicasService rutasTuristicasService) {
+    public RutasController(RutasTuristicasService rutasTuristicasService,CargarPoisService cargarPoisService) {
         this.rutasTuristicasService = rutasTuristicasService;
+        this.cargarPoisService = cargarPoisService;
     }
 
 
@@ -47,10 +49,11 @@ public class RutasController {
         //return rutasTuristicasService.getRutas();
     }
 
-    @PostMapping("api/prDates")
-    public EspecificacionRuta genPr(@RequestBody EspecificacionRuta especificacionRuta){
-        return especificacionRuta;
+    @GetMapping("/api/getPoisAbiertos")
+    public List<Poi> getPoisAbiertos(@RequestBody EspecificacionFechaRuta especificacionFechaRuta){
+        return cargarPoisService.cargarPoisAbiertos(1,especificacionFechaRuta);
     }
+
     
 
 

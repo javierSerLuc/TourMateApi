@@ -2,13 +2,16 @@ package com.tfg.TourMateApi.services.impl;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.tfg.TourMateApi.models.EspecificacionFechaRuta;
 import com.tfg.TourMateApi.models.Poi;
 import com.tfg.TourMateApi.services.CargarPoisService;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
+import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CargarPoisServiceImpl implements CargarPoisService {
@@ -17,6 +20,13 @@ public class CargarPoisServiceImpl implements CargarPoisService {
 
         return cargarPoisJson(instancia);
     }
+
+    @Override
+    public List<Poi> cargarPoisAbiertos(int instancia, EspecificacionFechaRuta especificacionFechaRuta) {
+        List<Poi> pois = cargarPois(instancia);
+        return pois.stream().filter(poi -> poi.isPOIOpen(especificacionFechaRuta.getDia(),especificacionFechaRuta.getDateInicioRuta())).collect(Collectors.toList());
+    }
+
 
     private List<Poi> cargarPoisJson(int instancia){
         ObjectMapper objectMapper = new ObjectMapper();
