@@ -12,10 +12,7 @@ import org.springframework.stereotype.Service;
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 @Service
 @Qualifier("Greedy")
@@ -38,15 +35,31 @@ public class GenerarRutasServiceGreedy implements GenearRutasService {
 
         //Obtener Pois
         List<Poi> allPois = cargarPoisService.cargarPois(1);
-        List<Poi> poisToVisit = new ArrayList<>(allPois);
+
+        Poi poiInicial = null;
+        for(Poi poi : allPois){
+            if(Objects.equals(poi.getNombre(), especificacionFechaRuta.getPoiInicio())){
+                poiInicial = poi;
+                break;
+            }
+        }
+
+        List<Poi> allPoisInicializado = new ArrayList<>(allPois);
+        if(poiInicial != null){
+
+            allPoisInicializado.remove(poiInicial);
+            allPoisInicializado.add(0, poiInicial);
+        }
+
+        List<Poi> poisToVisit = new ArrayList<>(allPoisInicializado);
         poisToVisit.remove(0);
 
         //Obneter matriz de tiempos
-        List<List<Double>> matrizTiempos = this.generarTimeMatrixService.generarMatrizTiempo(allPois);
+        List<List<Double>> matrizTiempos = this.generarTimeMatrixService.generarMatrizTiempo(allPoisInicializado);
         //Aplicar Algoritmo
 
         for(int i = 0; i < num;i++){
-            rutas.add(busquedaGreedy(allPois.get(0),allPois,matrizTiempos,dateInicioRuta,dateFinRuta,diaRuta));
+            rutas.add(busquedaGreedy(allPoisInicializado.get(0),allPois,matrizTiempos,dateInicioRuta,dateFinRuta,diaRuta));
         }
 
         //Devolver Rutas

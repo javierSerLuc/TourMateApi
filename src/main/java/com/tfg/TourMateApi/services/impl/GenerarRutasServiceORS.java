@@ -45,6 +45,20 @@ public class GenerarRutasServiceORS implements GenearRutasService {
 
         //obtener pois
         List<Poi> allPois = this.cargarPoisService.cargarPois(1);
+        List<Poi> allPoisInicializado = new ArrayList<>(allPois);
+
+        Poi poiInicial = null;
+        for(Poi poi : allPois){
+            if(Objects.equals(poi.getNombre(), especificacionFechaRuta.getPoiInicio())){
+                poiInicial = poi;
+                break;
+            }
+        }
+        if(poiInicial != null){
+
+            allPoisInicializado.remove(poiInicial);
+            allPoisInicializado.add(0, poiInicial);
+        }
 
         //generar rutas
         for(int i = 0; i < num; i++){
@@ -52,8 +66,10 @@ public class GenerarRutasServiceORS implements GenearRutasService {
 
 
             //añado ruta
-            Collections.shuffle(allPois);
-            Ruta r = new Ruta(generarRutaORS(allPois,dateInicioRuta,dateFinRuta,diaRuta));
+            Collections.shuffle(allPoisInicializado);
+            allPoisInicializado.remove(poiInicial);
+            allPoisInicializado.add(0,poiInicial);
+            Ruta r = new Ruta(generarRutaORS(poiInicial,allPoisInicializado,dateInicioRuta,dateFinRuta,diaRuta));
             rutas.add(r);
         }
 
@@ -63,7 +79,7 @@ public class GenerarRutasServiceORS implements GenearRutasService {
         return rutas;
     }
 
-    private List<Poi> generarRutaORS(List<Poi> pois, LocalTime initTime, LocalTime endTime, DayOfWeek dia){
+    private List<Poi> generarRutaORS(Poi poiInicial,List<Poi> pois, LocalTime initTime, LocalTime endTime, DayOfWeek dia){
         List<Poi> poisVisitados = new ArrayList<>();
         //Instaniciar datos
         List<Job> jobs = new ArrayList<>();

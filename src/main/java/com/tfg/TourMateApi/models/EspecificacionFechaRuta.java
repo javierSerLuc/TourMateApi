@@ -21,7 +21,7 @@ public class EspecificacionFechaRuta {
     private LocalTime dateInicioRuta;
     @JsonDeserialize(using = LocalTimeDeserializer.class)
     private LocalTime dateFinRuta;
-    private Poi poiInicio;
+    private String poiInicio;
 
 
 }
