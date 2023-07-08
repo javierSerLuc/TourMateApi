@@ -49,7 +49,7 @@ public class RutasController {
         //return rutasTuristicasService.getRutas();
     }
 
-    @GetMapping("/api/getPoisAbiertos")
+    @PostMapping("/api/getPoisAbiertos")
     public List<Poi> getPoisAbiertos(@RequestBody EspecificacionFechaRuta especificacionFechaRuta){
         return cargarPoisService.cargarPoisAbiertos(1,especificacionFechaRuta);
     }

@@ -17,7 +17,7 @@ public class RutasTuristicasServiceImpl implements RutasTuristicasService {
     private GenerarPathsService generarPathsService;
     private TopsisService topsisService;
 
-    public RutasTuristicasServiceImpl(@Qualifier("ORS") GenearRutasService genearRutasService, GenerarPathsService generarPathsService,TopsisService topsisService) {
+    public RutasTuristicasServiceImpl(@Qualifier("Greedy") GenearRutasService genearRutasService, GenerarPathsService generarPathsService,TopsisService topsisService) {
         this.genearRutasService = genearRutasService;
         this.generarPathsService = generarPathsService;
         this.topsisService = topsisService;
