@@ -54,6 +54,15 @@ public class GenerarRutasServiceORS implements GenearRutasService {
                 break;
             }
         }
+        if (poiInicial == null) {
+            for(Poi poi: allPois){
+                if(poi.isPOIOpen(diaRuta,dateInicioRuta)){
+                    poiInicial = poi;
+                    break;
+                }
+            }
+
+        }
         if(poiInicial != null){
 
             allPoisInicializado.remove(poiInicial);
@@ -66,6 +75,7 @@ public class GenerarRutasServiceORS implements GenearRutasService {
 
 
             //añado ruta
+            //TODO: Esto no hace falta XD
             Collections.shuffle(allPoisInicializado);
             allPoisInicializado.remove(poiInicial);
             allPoisInicializado.add(0,poiInicial);
