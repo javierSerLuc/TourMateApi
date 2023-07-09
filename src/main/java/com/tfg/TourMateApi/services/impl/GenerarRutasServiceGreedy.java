@@ -44,6 +44,16 @@ public class GenerarRutasServiceGreedy implements GenearRutasService {
             }
         }
 
+        if (poiInicial == null) {
+            for(Poi poi: allPois){
+                if(poi.isPOIOpen(diaRuta,dateInicioRuta)){
+                    poiInicial = poi;
+                    break;
+                }
+            }
+
+        }
+
         List<Poi> allPoisInicializado = new ArrayList<>(allPois);
         if(poiInicial != null){
 
@@ -51,14 +61,15 @@ public class GenerarRutasServiceGreedy implements GenearRutasService {
             allPoisInicializado.add(0, poiInicial);
         }
 
-        List<Poi> poisToVisit = new ArrayList<>(allPoisInicializado);
-        poisToVisit.remove(0);
+        //?-List<Poi> poisToVisit = new ArrayList<>(allPoisInicializado);
+        //?-poisToVisit.remove(0);
 
         //Obneter matriz de tiempos
         List<List<Double>> matrizTiempos = this.generarTimeMatrixService.generarMatrizTiempo(allPoisInicializado);
         //Aplicar Algoritmo
 
         for(int i = 0; i < num;i++){
+            //cambiar el vector y el primero
             rutas.add(busquedaGreedy(allPoisInicializado.get(0),allPois,matrizTiempos,dateInicioRuta,dateFinRuta,diaRuta));
         }
 
