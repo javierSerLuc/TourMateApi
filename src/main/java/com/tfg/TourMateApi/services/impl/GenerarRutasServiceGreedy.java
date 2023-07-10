@@ -45,6 +45,7 @@ public class GenerarRutasServiceGreedy implements GenearRutasService {
         }
 
         if (poiInicial == null) {
+            Collections.shuffle(allPois);
             for(Poi poi: allPois){
                 if(poi.isPOIOpen(diaRuta,dateInicioRuta)){
                     poiInicial = poi;
@@ -70,7 +71,7 @@ public class GenerarRutasServiceGreedy implements GenearRutasService {
 
         for(int i = 0; i < num;i++){
             //cambiar el vector y el primero
-            rutas.add(busquedaGreedy(allPoisInicializado.get(0),allPois,matrizTiempos,dateInicioRuta,dateFinRuta,diaRuta));
+            rutas.add(busquedaGreedy(allPoisInicializado.get(0),allPoisInicializado,matrizTiempos,dateInicioRuta,dateFinRuta,diaRuta));
         }
 
         //Devolver Rutas
