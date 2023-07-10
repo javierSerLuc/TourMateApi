@@ -37,7 +37,7 @@ public class RutasTuristicasServiceImpl implements RutasTuristicasService {
 
 
         //Ordenarlas
-        List<Ruta> rutasOrdenadas = topsisService.ordenacionTopsis(rutas);
+        List<Ruta> rutasOrdenadas = topsisService.ordenacionTopsis(rutas,especificacionRuta.getEspecificacionCriteriosRuta());
 
         //Devolverlas
         //return genearRutasService.generarRutas(numRutas);

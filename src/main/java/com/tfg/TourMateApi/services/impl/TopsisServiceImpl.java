@@ -1,6 +1,7 @@
 package com.tfg.TourMateApi.services.impl;
 
 import com.tfg.TourMateApi.models.Criterios;
+import com.tfg.TourMateApi.models.EspecificacionCriteriosRuta;
 import com.tfg.TourMateApi.models.Ruta;
 import com.tfg.TourMateApi.services.DecisionMatrixService;
 import com.tfg.TourMateApi.services.TopsisService;
@@ -27,7 +28,7 @@ public class TopsisServiceImpl implements TopsisService {
     }
 
     @Override
-    public List<Ruta> ordenacionTopsis(List<Ruta> rutas) {
+    public List<Ruta> ordenacionTopsis(List<Ruta> rutas, EspecificacionCriteriosRuta especificacionCriteriosRuta) {
         //inicializar
         List<Ruta> rutasOrdenadas = rutas;
 
