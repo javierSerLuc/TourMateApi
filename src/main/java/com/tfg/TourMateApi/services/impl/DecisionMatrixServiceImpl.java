@@ -1,6 +1,7 @@
 package com.tfg.TourMateApi.services.impl;
 
 import com.tfg.TourMateApi.models.Criterios;
+import com.tfg.TourMateApi.models.EspecificacionCriteriosRuta;
 import com.tfg.TourMateApi.models.Ruta;
 import com.tfg.TourMateApi.services.DecisionMatrixService;
 import lombok.Getter;
@@ -31,7 +32,7 @@ public class DecisionMatrixServiceImpl implements DecisionMatrixService {
     }
 
     @Override
-    public List<List<Double>> getDecisionMatrix(List<Ruta> rutas) {
+    public List<List<Double>> getDecisionMatrix(List<Ruta> rutas, EspecificacionCriteriosRuta especificacionCriteriosRuta) {
         /**/
         matrizEvaluacion.clear();
         matrizDecision.clear();

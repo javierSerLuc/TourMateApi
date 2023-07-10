@@ -37,7 +37,7 @@ public class TopsisServiceImpl implements TopsisService {
         }
 
         //obtener matriz decision
-        List<List<Double>> matrizDecision = decisionMatrixService.getDecisionMatrix(rutas);
+        List<List<Double>> matrizDecision = decisionMatrixService.getDecisionMatrix(rutas,especificacionCriteriosRuta);
 
         //Pis NIS
         inicializarPisNis(matrizDecision);
