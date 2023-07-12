@@ -27,7 +27,7 @@ public class DecisionMatrixServiceImpl implements DecisionMatrixService {
         criterios = new Criterios();
         matrizEvaluacion = new ArrayList<>();
         matrizDecision = new ArrayList<>();
-        vectorPesos = new ArrayList<>();
+        vectorPesos = new ArrayList<>(criterios.getNUMCRITERIOS());
         matrizPonderada = new ArrayList<>();
     }
 
@@ -41,8 +41,9 @@ public class DecisionMatrixServiceImpl implements DecisionMatrixService {
 
         matrizEvaluacion = new ArrayList<>();
         matrizDecision = new ArrayList<>();
-        vectorPesos = new ArrayList<>();
+        vectorPesos = new ArrayList<>(criterios.getNUMCRITERIOS());
         matrizPonderada = new ArrayList<>();
+
 
 
 
@@ -50,7 +51,7 @@ public class DecisionMatrixServiceImpl implements DecisionMatrixService {
         for(int i = 0; i < numRutas ;i++){
             matrizEvaluacion.add(new ArrayList<>());
         }
-        inicializarVectorPesos();
+        inicializarVectorPesos(especificacionCriteriosRuta);
 
 
         //Evaluar
@@ -76,8 +77,11 @@ public class DecisionMatrixServiceImpl implements DecisionMatrixService {
         */
         /*BUENOS*/
         evaluarCriterioPoisVisitados(rutas);
+        evaluarCriterioAccesibilidad(rutas);
+
         /*MALOS*/
         evaluarCriterioDistancia(rutas);
+        evaluarCriterioCoste(rutas);
 
 
     }
@@ -91,6 +95,18 @@ public class DecisionMatrixServiceImpl implements DecisionMatrixService {
     private void evaluarCriterioPoisVisitados (List<Ruta> rutas){
         for(int i = 0; i < rutas.size();i++){
             matrizEvaluacion.get(i).add(criterios.getIPOISVISITADOS(), (double) rutas.get(i).getPois().size());
+        }
+    }
+
+    private void evaluarCriterioAccesibilidad (List<Ruta> rutas){
+        for(int i = 0; i < rutas.size();i++){
+            matrizEvaluacion.get(i).add(criterios.getIACCESIBILIDAD(), 1.0);
+        }
+    }
+
+    private void evaluarCriterioCoste (List<Ruta> rutas){
+        for(int i = 0; i < rutas.size();i++){
+            matrizEvaluacion.get(i).add(criterios.getICOSTE(), 10.0);
         }
     }
 
@@ -130,9 +146,32 @@ public class DecisionMatrixServiceImpl implements DecisionMatrixService {
             }
         }
     }
-    private void inicializarVectorPesos(){
-        vectorPesos.add(0.75);
-        vectorPesos.add(0.25);
+    private void inicializarVectorPesos(EspecificacionCriteriosRuta especificacionCriteriosRuta){
+        List<Double> pesos = new ArrayList<>(criterios.getNUMCRITERIOS());
+        for(int i = 0; i < especificacionCriteriosRuta.getCriteriosRelevantes();i++){
+            Double sumatorio = 0.0;
+            for(int j = i + 1; j <= especificacionCriteriosRuta.getCriteriosRelevantes();j++ ){
+                sumatorio += 1.0/j;
+            }
+            Double resultado = (1.0/especificacionCriteriosRuta.getCriteriosRelevantes())*sumatorio;
+            pesos.add(resultado);
+        }
+        while(pesos.size() != criterios.getNUMCRITERIOS()){
+            pesos.add(0.0);
+
+        }
+
+        //buenos
+        vectorPesos.add(criterios.getIPOISVISITADOS(),pesos.get(especificacionCriteriosRuta.getNumPois()));
+        vectorPesos.add(criterios.getIACCESIBILIDAD(),pesos.get(especificacionCriteriosRuta.getAccesibilidad()));
+
+
+        //malos
+        vectorPesos.add(criterios.getIDISTANCIA(),pesos.get(especificacionCriteriosRuta.getDistancia()));
+        vectorPesos.add(criterios.getICOSTE(),pesos.get(especificacionCriteriosRuta.getCoste()));
+
+        //vectorPesos.add(0.75);
+        //vectorPesos.add(0.25);
         //vectorPesos.add(1.0);
         //vectorPesos.add(0.0);
     }

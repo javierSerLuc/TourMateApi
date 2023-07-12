@@ -9,7 +9,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class EspecificacionCriteriosRuta {
     private int criteriosRelevantes;
-    private int Distancia;
+    private int distancia;
     private int numPois;
     private int coste;
     private int accesibilidad;

@@ -52,8 +52,9 @@ public class TopsisServiceImpl implements TopsisService {
     }
 
     private void inicializarPisNis(List<List<Double>>matrizDecision){
-        inicializarNis(matrizDecision);
         inicializarPis(matrizDecision);
+        inicializarNis(matrizDecision);
+
     }
 
     private void inicializarPis(List<List<Double>>matrizDecision){
