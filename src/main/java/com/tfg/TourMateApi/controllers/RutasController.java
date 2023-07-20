@@ -11,6 +11,7 @@ import com.tfg.TourMateApi.services.CargarPoisService;
 import com.tfg.TourMateApi.services.GenerarTimeMatrixService;
 import com.tfg.TourMateApi.services.RutasTuristicasService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
@@ -23,6 +24,8 @@ public class RutasController {
 
     private RutasTuristicasService rutasTuristicasService;
     private CargarPoisService cargarPoisService;
+    @Value("${instancia}")
+    private int instanciaPois;
 
 
 
@@ -51,7 +54,7 @@ public class RutasController {
 
     @PostMapping("/api/getPoisAbiertos")
     public List<Poi> getPoisAbiertos(@RequestBody EspecificacionFechaRuta especificacionFechaRuta){
-        return cargarPoisService.cargarPoisAbiertos(1,especificacionFechaRuta);
+        return cargarPoisService.cargarPoisAbiertos(instanciaPois,especificacionFechaRuta);
     }
 
     

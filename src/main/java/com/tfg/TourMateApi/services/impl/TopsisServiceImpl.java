@@ -1,6 +1,7 @@
 package com.tfg.TourMateApi.services.impl;
 
 import com.tfg.TourMateApi.models.Criterios;
+import com.tfg.TourMateApi.models.EspecificacionCriteriosRuta;
 import com.tfg.TourMateApi.models.Ruta;
 import com.tfg.TourMateApi.services.DecisionMatrixService;
 import com.tfg.TourMateApi.services.TopsisService;
@@ -27,7 +28,7 @@ public class TopsisServiceImpl implements TopsisService {
     }
 
     @Override
-    public List<Ruta> ordenacionTopsis(List<Ruta> rutas) {
+    public List<Ruta> ordenacionTopsis(List<Ruta> rutas, EspecificacionCriteriosRuta especificacionCriteriosRuta) {
         //inicializar
         List<Ruta> rutasOrdenadas = rutas;
 
@@ -36,7 +37,7 @@ public class TopsisServiceImpl implements TopsisService {
         }
 
         //obtener matriz decision
-        List<List<Double>> matrizDecision = decisionMatrixService.getDecisionMatrix(rutas);
+        List<List<Double>> matrizDecision = decisionMatrixService.getDecisionMatrix(rutas,especificacionCriteriosRuta);
 
         //Pis NIS
         inicializarPisNis(matrizDecision);
@@ -51,8 +52,9 @@ public class TopsisServiceImpl implements TopsisService {
     }
 
     private void inicializarPisNis(List<List<Double>>matrizDecision){
-        inicializarNis(matrizDecision);
         inicializarPis(matrizDecision);
+        inicializarNis(matrizDecision);
+
     }
 
     private void inicializarPis(List<List<Double>>matrizDecision){

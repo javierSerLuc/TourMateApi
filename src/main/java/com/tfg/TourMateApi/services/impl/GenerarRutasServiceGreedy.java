@@ -7,6 +7,7 @@ import com.tfg.TourMateApi.services.CargarPoisService;
 import com.tfg.TourMateApi.services.GenearRutasService;
 import com.tfg.TourMateApi.services.GenerarTimeMatrixService;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.time.DayOfWeek;
@@ -19,6 +20,9 @@ import java.util.*;
 public class GenerarRutasServiceGreedy implements GenearRutasService {
     private CargarPoisService cargarPoisService;
     private GenerarTimeMatrixService generarTimeMatrixService;
+
+    @Value("${instancia}")
+    private int instanciaPois;
 
     public GenerarRutasServiceGreedy(CargarPoisService cargarPoisService, GenerarTimeMatrixService generarTimeMatrixService) {
         this.cargarPoisService = cargarPoisService;
@@ -34,7 +38,7 @@ public class GenerarRutasServiceGreedy implements GenearRutasService {
         DayOfWeek diaRuta = especificacionFechaRuta.getDia();
 
         //Obtener Pois
-        List<Poi> allPois = cargarPoisService.cargarPois(1);
+        List<Poi> allPois = cargarPoisService.cargarPois(instanciaPois);
 
         Poi poiInicial = null;
         for(Poi poi : allPois){
