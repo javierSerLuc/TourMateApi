@@ -10,6 +10,7 @@ import com.tfg.TourMateApi.models.Ruta;
 import com.tfg.TourMateApi.services.CargarPoisService;
 import com.tfg.TourMateApi.services.GenearRutasService;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -25,6 +26,8 @@ import java.util.*;
 @Qualifier("ORS")
 public class GenerarRutasServiceORS implements GenearRutasService {
     private CargarPoisService cargarPoisService;
+    @Value("${instancia}")
+    private int instanciaPois;
 
     public GenerarRutasServiceORS(CargarPoisService cargarPoisService) {
         this.cargarPoisService = cargarPoisService;
@@ -44,7 +47,7 @@ public class GenerarRutasServiceORS implements GenearRutasService {
         DayOfWeek diaRuta = especificacionFechaRuta.getDia();
 
         //obtener pois
-        List<Poi> allPois = this.cargarPoisService.cargarPois(1);
+        List<Poi> allPois = this.cargarPoisService.cargarPois(instanciaPois);
         List<Poi> allPoisInicializado = new ArrayList<>(allPois);
 
         Poi poiInicial = null;
