@@ -6,5 +6,5 @@ import com.tfg.TourMateApi.models.Ruta;
 import java.util.List;
 
 public interface GenearRutasService {
-    public List<Ruta> generarRutas(int num , EspecificacionFechaRuta especificacionFechaRuta);
+    public List<Ruta> generarRutas(int num , EspecificacionFechaRuta especificacionFechaRuta, String vehicle);
 }

@@ -21,20 +21,20 @@ import java.util.Map;
 @Service
 public class GenerarPathServiceORS implements GenerarPathsService {
     @Override
-    public List<Ruta> generarPath(List<Ruta> rutas) {
+    public List<Ruta> generarPath(List<Ruta> rutas, String vehicle) {
         //For each
         for(Ruta ruta : rutas){
-            generarPath(ruta);
+            generarPath(ruta,vehicle);
         }
             //llamada api ruta
         return rutas;
     }
 
-    private void generarPath(Ruta ruta){
-        ruta.setpath(procesarPath(getPathORM(ruta),ruta));
+    private void generarPath(Ruta ruta, String vehicle){
+        ruta.setpath(procesarPath(getPathORM(ruta,vehicle),ruta));
     }
 
-    private ResponseEntity<String> getPathORM(Ruta ruta){
+    private ResponseEntity<String> getPathORM(Ruta ruta,String vehicle){
         RestTemplate restTemplate = new RestTemplate();
 
 
@@ -67,7 +67,7 @@ public class GenerarPathServiceORS implements GenerarPathsService {
 
         HttpEntity<String> requestEntity = new HttpEntity<>(payload, headers);
 
-        String apiUrl = "https://api.openrouteservice.org/v2/directions/foot-walking/geojson";
+        String apiUrl = "https://api.openrouteservice.org/v2/directions/" + vehicle + "/geojson";
 
         ResponseEntity<String> responseEntity = restTemplate.postForEntity(apiUrl, requestEntity, String.class);
         return responseEntity;

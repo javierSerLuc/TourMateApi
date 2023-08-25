@@ -31,8 +31,8 @@ public class RutasTuristicasServiceImpl implements RutasTuristicasService {
         //generar Rutas
 
         //para cada ruta de la lista le añado el campo de path
-        List<Ruta> rutas = genearRutasService.generarRutas(numRutas,especificacionRuta.getEspecificacionFechaRuta());
-        rutas = generarPathsService.generarPath(rutas);
+        List<Ruta> rutas = genearRutasService.generarRutas(numRutas,especificacionRuta.getEspecificacionFechaRuta(),especificacionRuta.getVehicle());
+        rutas = generarPathsService.generarPath(rutas,especificacionRuta.getVehicle());
 
 
 

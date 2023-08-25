@@ -10,4 +10,5 @@ import lombok.Setter;
 public class EspecificacionRuta {
     private EspecificacionCriteriosRuta especificacionCriteriosRuta;
     private EspecificacionFechaRuta especificacionFechaRuta;
+    String vehicle;
 }

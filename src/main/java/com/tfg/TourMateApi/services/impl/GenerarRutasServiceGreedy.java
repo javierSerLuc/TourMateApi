@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.time.DayOfWeek;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.*;
 
@@ -30,7 +29,7 @@ public class GenerarRutasServiceGreedy implements GenearRutasService {
     }
 
     @Override
-    public List<Ruta> generarRutas(int num, EspecificacionFechaRuta especificacionFechaRuta) {
+    public List<Ruta> generarRutas(int num, EspecificacionFechaRuta especificacionFechaRuta, String vehicle) {
 
         List<Ruta> rutas = new ArrayList<>();
         LocalTime dateInicioRuta = especificacionFechaRuta.getDateInicioRuta(); /*LocalTime.of(9,0);*/
@@ -70,7 +69,7 @@ public class GenerarRutasServiceGreedy implements GenearRutasService {
         //?-poisToVisit.remove(0);
 
         //Obneter matriz de tiempos
-        List<List<Double>> matrizTiempos = this.generarTimeMatrixService.generarMatrizTiempo(allPoisInicializado);
+        List<List<Double>> matrizTiempos = this.generarTimeMatrixService.generarMatrizTiempo(allPoisInicializado,vehicle);
         //Aplicar Algoritmo
 
         for(int i = 0; i < num;i++){

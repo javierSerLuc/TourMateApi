@@ -1,6 +1,5 @@
 package com.tfg.TourMateApi.services.impl;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tfg.TourMateApi.models.EspecificacionFechaRuta;
@@ -34,7 +33,7 @@ public class GenerarRutasServiceORS implements GenearRutasService {
     }
 
     @Override
-    public List<Ruta> generarRutas(int num, EspecificacionFechaRuta especificacionFechaRuta) {
+    public List<Ruta> generarRutas(int num, EspecificacionFechaRuta especificacionFechaRuta, String vehicle) {
         //Set datos previos
         List<Ruta> rutas = new ArrayList<>();
 

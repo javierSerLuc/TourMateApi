@@ -19,12 +19,12 @@ import java.util.Map;
 @Service
 public class GeneratMatrizTiempoORS implements GenerarTimeMatrixService {
     @Override
-    public List<List<Double>> generarMatrizTiempo(List<Poi> pois) {
-        ResponseEntity<String> apiRespone = callORMApi(pois);
+    public List<List<Double>> generarMatrizTiempo(List<Poi> pois, String vehicle) {
+        ResponseEntity<String> apiRespone = callORMApi(pois,vehicle);
         return procesarMatriz(apiRespone);
     }
 
-    private ResponseEntity<String> callORMApi(List<Poi> pois){
+    private ResponseEntity<String> callORMApi(List<Poi> pois, String vechicle){
         RestTemplate restTemplate = new RestTemplate();
         //List<Poi> pois = cargarPoisService.cargarPois(1);
 
@@ -56,7 +56,7 @@ public class GeneratMatrizTiempoORS implements GenerarTimeMatrixService {
 
         HttpEntity<String> requestEntity = new HttpEntity<>(payload, headers);
 
-        String apiUrl = "https://api.openrouteservice.org/v2/matrix/foot-walking";
+        String apiUrl = "https://api.openrouteservice.org/v2/matrix/" + vechicle;
 
         ResponseEntity<String> responseEntity = restTemplate.postForEntity(apiUrl, requestEntity, String.class);
         return responseEntity;
