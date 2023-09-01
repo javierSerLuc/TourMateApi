@@ -51,6 +51,9 @@ public class CargarPoisServiceImpl implements CargarPoisService {
             case 2:
                 dataSet = "src/main/resources/poisJson/instancia-mejores.json";
                 break;
+            case 3:
+                dataSet = "src/main/resources/poisJson/mejoresCompleted.json";
+                break;
             default:
                 dataSet = "src/main/resources/poisJson/response-100.json";
                 break;

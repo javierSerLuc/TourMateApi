@@ -31,7 +31,10 @@ public class Poi {
     @JsonProperty("horario")
     private List<String> horario;
 
-    public Poi(String nombre, String servicio, String lng, String lat, double tiempoVisita, String horario) {
+    private String descripcion;
+    private Double coste;
+
+    public Poi(String nombre, String servicio, String lng, String lat, double tiempoVisita, String horario, String descripcion,Double coste) {
         this.nombre = nombre;
         this.servicio = servicio;
         this.lat = lat;
@@ -39,6 +42,14 @@ public class Poi {
         this.tiempoVisita = tiempoVisita;
         this.horario = new ArrayList<>();
         this.setFranjaHoraria(horario);
+        if(coste == null){
+            this.coste = 0.0;
+        }
+        else{
+            this.coste = coste;
+        }
+
+        this.descripcion = descripcion;
     }
 
     private void setFranjaHoraria(String Horario){
