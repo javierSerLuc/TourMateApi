@@ -15,11 +15,13 @@ import java.util.List;
 public class TopsisServiceImpl implements TopsisService {
     private DecisionMatrixService decisionMatrixService;
     private Criterios criterios;
-    private List<Double> pis;
-    private List<Double> nis;
-    private List<List<Double>> distancias;
+    private List<Double> pis = new ArrayList<>();;
+    private List<Double> nis = new ArrayList<>();;
+    private List<List<Double>> distancias = new ArrayList<>();;
 
     public TopsisServiceImpl(DecisionMatrixService decisionMatrixService) {
+
+
         this.criterios = new Criterios();
         this.decisionMatrixService = decisionMatrixService;
         pis = new ArrayList<>();
@@ -29,6 +31,15 @@ public class TopsisServiceImpl implements TopsisService {
 
     @Override
     public List<Ruta> ordenacionTopsis(List<Ruta> rutas, EspecificacionCriteriosRuta especificacionCriteriosRuta) {
+        pis.clear();
+        nis.clear();
+        distancias.clear();
+
+        this.criterios = new Criterios();
+        pis = new ArrayList<>();
+        nis = new ArrayList<>();
+        distancias = new ArrayList<>();
+
         //inicializar
         List<Ruta> rutasOrdenadas = rutas;
 

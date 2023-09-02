@@ -12,7 +12,9 @@ public class EspecificacionCriteriosRuta {
     private int distancia;
     private int numPois;
     private int coste;
-    private int accesibilidad;
+    private int numMonumentos;
+    private int numAreasNaturales;
 
-    //TODO: especificacion servicio
+
+
 }

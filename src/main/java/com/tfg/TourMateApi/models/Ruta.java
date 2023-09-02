@@ -14,6 +14,9 @@ public class Ruta implements Comparable<Ruta> {
     private List<List<Double>> path;
     private Double distancia;
     private Double coeficienteRS;
+    private Double coste;
+    private Double puntosMonumento;
+    private Double puntosAreasNaturales;
 
     public Ruta() {
         this.pois = new ArrayList<>();
@@ -36,6 +39,17 @@ public class Ruta implements Comparable<Ruta> {
     public void setDistancia(Double distancia){this.distancia = distancia;}
     public void setCoeficienteRS(Double coeficienteRS){this.coeficienteRS = coeficienteRS;}
 
+    public void setCoste(Double coste) {
+        this.coste = coste;
+    }
+
+    public void setPuntosMonumento(Double puntosMonumento) {
+        this.puntosMonumento = puntosMonumento;
+    }
+
+    public void setPuntosAreasNaturales(Double puntosAreasNaturales) {
+        this.puntosAreasNaturales = puntosAreasNaturales;
+    }
 
     @Override
     public int compareTo(Ruta otraRuta) {

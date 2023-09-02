@@ -121,7 +121,8 @@ public class GenerarRutasServiceGreedy implements GenearRutasService {
         Poi poiActual = initPoi;
         Ruta ruta = new Ruta();
         ruta.addPoi(initPoi);
-        LocalTime fechaActual = initTime; //TODO : añadir tiempo visita del primero
+        LocalTime fechaActual = initTime;
+        fechaActual = fechaActual.plusSeconds((long) (initPoi.getTiempoVisita() * 60));
 
         List<Poi> poisRestantes = new ArrayList<>(pois);
         poisRestantes.remove(0);
